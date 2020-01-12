@@ -20,3 +20,11 @@ export function searchMetadata(myArray) {
         }
     }
 }
+
+export const fillArray = (value, len) => {
+    var arr = [];
+    for (var i = 0; i < len; i++) {
+        arr.push(value);
+    }
+    return arr;
+}

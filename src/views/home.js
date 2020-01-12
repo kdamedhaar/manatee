@@ -1,3 +1,5 @@
+import { fillArray } from '../middlewares/parseResults';
+
 export const baseHomeView = {
   type: "home",
   blocks: [
@@ -38,36 +40,71 @@ export const baseHomeView = {
             emoji: true
           },
           value: "search"
+        },
+        {
+          type: "button",
+          text: {
+            type: "plain_text",
+            text: "My Data Wallet",
+            emoji: true
+          },
+          value: "wallet"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "image",
+          "image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
+          "alt_text": "placeholder"
+        }
+      ]
+    },
+    {
+      "type": "context",
+      "elements": [
+        {
+          "type": "image",
+          "image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
+          "alt_text": "placeholder"
         }
       ]
     }
   ]
 }
 
+export const getProgressBar = (text) => {
+  let progressView = baseHomeView;
+
+  let gaps = fillArray({
+    "type": "context",
+    "elements": [
+      {
+        "type": "image",
+        "image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
+        "alt_text": "placeholder"
+      }
+    ]
+  }, 5)
+
+  progressView.blocks.push(...gaps);
+
+  progressView.blocks.push({
+    type: "section",
+    text: {
+      type: "mrkdwn",
+      text: `_Your ${text} request is being processed :smile:_`
+    }
+  });
+
+}
+
 
 export const getPublishSuccessHomeView = (did) => {
   let successHomeView = baseHomeView;
   successHomeView.blocks = baseHomeView.blocks.slice();
-  successHomeView.blocks.push({
-    "type": "context",
-    "elements": [
-      {
-        "type": "image",
-        "image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
-        "alt_text": "placeholder"
-      }
-    ]
-  });
-  successHomeView.blocks.push({
-    "type": "context",
-    "elements": [
-      {
-        "type": "image",
-        "image_url": "https://api.slack.com/img/blocks/bkb_template_images/placeholder.png",
-        "alt_text": "placeholder"
-      }
-    ]
-  });
   successHomeView.blocks.push({
     "type": "divider"
   })
@@ -106,4 +143,4 @@ export const getPublishSuccessHomeView = (did) => {
         }]
     })
   return successHomeView;
-} 
+}

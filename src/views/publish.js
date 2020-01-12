@@ -269,7 +269,7 @@ export const publishToOcean = async (data) => {
     let resp = await axios(
       {
         method: 'post',
-        url: "https://agent.oceanprotocol.com/api/general/publish",
+        url: "https://agent.oceanprotocol.com/api/general/publishddo",
         headers: {
           "Content-Type": "application/json",
           "Accept": "*/*"

@@ -13,30 +13,49 @@ export const preparePublishData = async (payload) => {
     details.license = payload.view.state.values['block_license']['input_license'].value;
     details.price = payload.view.state.values['block_price']['input_price'].value;
     details.categories = payload.view.state.values['block_categories']['input_categories'].selected_options.slice();
+    details.publisher = payload.user.id;
 
     let selectedCategories = await Promise.all(details.categories.map(cat => cat.text.text));
 
 
     return {
-        "name": `${details.title}`,
-        "description": `${details.description}`,
-        "author": `${details.author}`,
-        "license": `${details.license}`,
-        "copyrightHolder": `${details.copyright}`,
-        "dateCreated": `${details.createdOn}T00:00:00Z`,
-        "price": details.price * (10 ** 18),
-        "type": "dataset",
-        "files": [
-            {
-                "index": 0,
-                "contentType": "application/zip",
-                "contentLength": "120575",
-                "compression": "zip",
-                "encoding": "UTF-8",
-                "url": `${details.url}`
-            }
-        ],
-        "categories": [`${selectedCategories}`]
-    }
+        "publisher": "",
+        "metadata": {
+            "main": {
+                "name": `${details.title}`,
+                "dateCreated": `${details.createdOn}T00:00:00Z`,
+                "author": `${details.author}`,
+                "license": `${details.license}`,
+                "price": `${details.price * (10 ** 18)}`,
+                "files": [
+                    {
+                        "index": 0,
+                        "contentType": "application/file",
+                        "checksum": "2bf9d229d110d1976cdf85e9f3256c7f",
+                        "checksumType": "MD5",
+                        "contentLength": "12057507",
+                        "compression": "zip",
+                        "encoding": "UTF-8",
+                        "url": `${details.url}`
+                    }
+                ],
 
+                "type": "dataset"
+            },
+            "additionalInformation": {
+                "publisher": `${details.publisher}`,
+                "checksum": "",
+                "categories": [`${selectedCategories}`],
+                "tags": [
+                    "manatee"
+                ],
+                "description": `${details.description}`,
+                "copyrightHolder": `${details.copyright}`,
+                "workExample": "image path, id, label",
+                "links": [],
+                "inLanguage": "en"
+            }
+        }
+    }
 }
+

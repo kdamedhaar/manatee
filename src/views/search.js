@@ -32,7 +32,7 @@ export default {
         action_id: "search-box",
         placeholder: {
           type: "plain_text",
-          text: "(e.g.) Trees in Amazon"
+          text: "(e.g.) trees"
         }
       },
       label: {
@@ -43,3 +43,4 @@ export default {
     }
   ]
 };
+

@@ -48,10 +48,11 @@ export async function sendViewPublishRequest(url, view, user_id) {
   });
 }
 
+
 // Add a request interceptor
 axios.interceptors.request.use(
   req => {
-    console.log(req);
+    //console.log(req);
     return req;
   },
   function (error) {

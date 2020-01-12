@@ -36,7 +36,7 @@ export default async (type, did) => {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": details.description
+                "text": details.description.substring(0, 2990)
             }
         },
         {
